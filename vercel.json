@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": null,
+  "buildCommand": "node tools/stamp-assets.mjs",
   "installCommand": null,
-  "outputDirectory": null,
+  "outputDirectory": ".",
   "trailingSlash": false,
   "headers": [
     {
@@ -29,7 +29,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, stale-while-revalidate=86400"
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
