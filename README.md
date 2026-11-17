@@ -74,6 +74,23 @@ tier the "from" price advertises.
   in-house design service for £15.
 - **Search** runs client-side over product names, blurbs and specs.
 
+## Deploying
+
+The site is static with no build step, so any host works. For Vercel:
+
+**Dashboard (no CLI):** Vercel → Add New → Project → import `clickworks-uk/urprint` →
+Framework Preset **Other** → leave build and output settings empty → Deploy. `vercel.json`
+in the repo root already sets the framework to none and adds cache and security headers.
+
+**CLI:**
+
+```bash
+npx vercel --prod
+```
+
+The production branch is `claude/quirky-hawking-1dmxzr` (the repository's default branch), so
+pushes to it redeploy once the project is linked.
+
 ## Demonstration limits
 
 This is a front-end storefront. There is no server, so no payment is processed, no artwork file
