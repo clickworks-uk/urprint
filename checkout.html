@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout | UR Print Wolverhampton</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-app-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Checkout</span>
+    </nav>
+
+    <div data-empty hidden style="padding:50px 0 80px;text-align:center">
+      <h1>Your basket is empty</h1>
+      <p style="color:var(--ink-60)">Configure a product and it will appear here, ready for collection or delivery.</p>
+      <p><a class="btn" href="category.html">Browse all products</a></p>
+    </div>
+
+    <div class="checkout" data-checkout hidden>
+      <form data-checkout-form novalidate>
+        <h1 style="font-size:2rem;margin-bottom:18px">Checkout</h1>
+
+        <section class="cocard">
+          <h2><span class="cocard__num">1</span> Contact details</h2>
+          <div class="grid2">
+            <div class="field"><label for="c-first">First name</label><input id="c-first" name="first" type="text" autocomplete="given-name" required></div>
+            <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last" type="text" autocomplete="family-name" required></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required>
+              <p class="hint">Your proof and order updates go here.</p></div>
+            <div class="field"><label for="c-phone">Mobile</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" required>
+              <p class="hint">We text you when the job is boxed.</p></div>
+          </div>
+          <div class="field"><label for="c-company">Company (optional)</label><input id="c-company" name="company" type="text" autocomplete="organization"></div>
+        </section>
+
+        <section class="cocard">
+          <h2><span class="cocard__num">2</span> Collection or delivery</h2>
+          <div data-fulfil-picker></div>
+          <div data-fulfil-detail></div>
+        </section>
+
+        <section class="cocard">
+          <h2><span class="cocard__num">3</span> Payment</h2>
+          <div class="field"><label for="c-card">Card number</label><input id="c-card" name="card" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number"></div>
+          <div class="grid2">
+            <div class="field"><label for="c-exp">Expiry</label><input id="c-exp" name="exp" type="text" placeholder="MM / YY" autocomplete="cc-exp"></div>
+            <div class="field"><label for="c-cvc">Security code</label><input id="c-cvc" name="cvc" type="text" inputmode="numeric" placeholder="123" autocomplete="cc-csc"></div>
+          </div>
+          <div class="callout"><p><strong>This is a demonstration storefront.</strong> No payment is taken, no card details are transmitted and nothing you type here leaves your browser.</p></div>
+          <div class="field"><label class="checkline"><input type="checkbox" name="terms" value="yes">
+            I confirm my artwork is print-ready, or that I have asked UR Print to design it for me.</label></div>
+          <div data-checkout-error></div>
+          <button class="btn btn--lg btn--block" type="submit" data-place>Place order</button>
+          <p class="trustline" data-secureline></p>
+        </section>
+      </form>
+
+      <aside class="summary">
+        <div class="summary__head"><h2>Order summary</h2><a href="#" data-basket-open style="font-size:.85rem">Edit</a></div>
+        <div class="summary__items" data-summary-items></div>
+        <div class="summary__foot" data-summary-totals></div>
+      </aside>
+    </div>
+
+    <div class="confirm" data-confirm hidden>
+      <div class="confirm__tick" data-tick></div>
+      <h1>Order received — thank you</h1>
+      <p style="color:var(--ink-60)">We have emailed your confirmation. Your order reference is:</p>
+      <div class="confirm__ref" data-ref></div>
+      <div data-confirm-detail></div>
+      <p style="margin-top:26px">
+        <a class="btn" href="index.html">Back to the shop</a>
+        <a class="btn btn--ghost" href="track-order.html">Track this order</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<div data-app-footer></div>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/art.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

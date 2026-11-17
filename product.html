@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configure your print | UR Print Wolverhampton</title>
+<meta name="description" content="Configure size, material, finish and quantity with live pricing, then upload your artwork or book our in-house design service.">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-app-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
+    <div class="pdp" data-pdp hidden>
+      <div>
+        <div class="gallery">
+          <div class="gallery__main" data-gallery-main></div>
+          <div class="gallery__thumbs" data-gallery-thumbs></div>
+        </div>
+        <div class="pdp__info">
+          <h2>What you get</h2>
+          <ul class="speclist" data-specs></ul>
+          <div data-pricenote></div>
+          <h2 style="margin-top:34px">Artwork &amp; proofing</h2>
+          <p style="color:var(--ink-60);max-width:62ch">
+            Every file is opened and checked by a member of our studio before it goes to press — bleed, resolution,
+            fonts and colour mode. If something looks wrong we call you before we print, not after.
+            Prefer us to design it? Add the studio service and you will have a proof to approve within one working day.
+          </p>
+          <p><a href="artwork-guidelines.html">Read the full artwork guidelines →</a></p>
+
+          <h2 style="margin-top:34px">Getting it to you</h2>
+          <div class="valuestrip" style="border:1px solid var(--grey-100);border-radius:var(--radius-lg);overflow:hidden">
+            <div class="valuestrip__grid" data-pdp-promises></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="config" data-config>
+        <div class="config__head">
+          <span class="pcard__cat" data-cfg-cat></span>
+          <h1 data-cfg-title></h1>
+          <div class="config__rating" data-cfg-rating></div>
+        </div>
+        <div class="config__body">
+          <div data-options></div>
+
+          <div class="optgroup">
+            <div class="optgroup__label"><span class="flabel">Quantity</span><span class="pick" data-qty-note></span></div>
+            <div class="qtygrid" data-qty></div>
+          </div>
+
+          <div class="optgroup">
+            <span class="flabel">Your artwork</span>
+            <div class="artwork">
+              <div class="artwork__opt">
+                <input type="radio" name="artwork" id="aw-upload" value="upload" checked>
+                <label for="aw-upload"><span class="artwork__radio"></span>
+                  <span><b>Upload print-ready artwork</b><p>PDF, AI, EPS, PNG or JPG up to 100MB</p></span>
+                  <span class="cost">Free</span></label>
+                <div class="artwork__panel">
+                  <div class="dropzone" data-dropzone tabindex="0" role="button" aria-label="Choose artwork files">
+                    <span data-upload-icon></span>
+                    <b>Drop files here or click to browse</b>
+                    <span>We accept PDF, AI, EPS, PNG, JPG and TIFF</span>
+                  </div>
+                  <input type="file" data-fileinput multiple accept=".pdf,.ai,.eps,.png,.jpg,.jpeg,.tif,.tiff" hidden>
+                  <div class="filelist" data-filelist></div>
+                  <div class="checklist">
+                    <h5>Before you upload</h5>
+                    <ul data-checklist></ul>
+                  </div>
+                </div>
+              </div>
+              <div class="artwork__opt">
+                <input type="radio" name="artwork" id="aw-design" value="design">
+                <label for="aw-design"><span class="artwork__radio"></span>
+                  <span><b>Request in-house design service</b><p>Our studio sets it up and sends a proof to approve</p></span>
+                  <span class="cost">+£15.00</span></label>
+                <div class="artwork__panel">
+                  <div class="field">
+                    <label for="aw-brief">What should the design say?</label>
+                    <textarea id="aw-brief" data-brief placeholder="Wording, colours, any logo files you will email over, and anything you want it to look like."></textarea>
+                    <p class="hint">Includes one design concept and two rounds of amends. Logo redraws quoted separately.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="config__foot">
+          <div class="pricebox" data-pricebox>
+            <div class="pricebox__row">
+              <div>
+                <div class="pricebox__total" data-total>£0.00</div>
+                <div class="pricebox__unit" data-unit></div>
+              </div>
+              <div style="text-align:right" data-savebadge></div>
+            </div>
+            <div class="pricebox__meta">
+              <span>Price includes VAT at 20%</span>
+              <span data-exvat></span>
+            </div>
+          </div>
+          <button class="btn btn--lg btn--block" type="submit" data-add>Add to basket</button>
+          <button class="btn btn--ghost btn--block" type="button" data-quote>Need a bespoke size or quantity? Ask us</button>
+          <p class="turnaround" data-turnaround></p>
+        </div>
+      </form>
+    </div>
+
+    <div data-notfound hidden style="padding:60px 0;text-align:center">
+      <h1>We could not find that product</h1>
+      <p style="color:var(--ink-60)">It may have been renamed. Browse the full range or ask us for a quote.</p>
+      <p><a class="btn" href="category.html">Browse all products</a></p>
+    </div>
+  </div>
+
+  <section class="section section--grey" data-related-section hidden>
+    <div class="wrap">
+      <div class="section__head"><div><p class="eyebrow">Often ordered together</p><h2>Finish the set</h2></div></div>
+      <div class="prodgrid" data-related></div>
+    </div>
+  </section>
+</main>
+
+<div data-app-footer></div>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/art.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/product.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop products | UR Print Wolverhampton</title>
+<meta name="description" content="Browse UR Print's Wolverhampton product range — business cards, flyers, signs, banners, stickers, workwear and stationery with live pricing.">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-app-header></div>
+
+<main id="main">
+  <div class="pagehead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb" data-crumbs></nav>
+      <h1 data-cat-title>Products</h1>
+      <p data-cat-blurb></p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="catlayout">
+      <aside class="filters" aria-label="Filter products">
+        <div class="filters__block">
+          <h3>Categories</h3>
+          <ul data-filter-cats></ul>
+        </div>
+        <div class="filters__block" data-filter-subs-block hidden>
+          <h3 data-subs-heading>Product type</h3>
+          <ul data-filter-subs></ul>
+        </div>
+        <div class="helpbox">
+          <h4>Not sure what you need?</h4>
+          <p>Tell us the job and we will spec it, price it and send a visual — usually within a working day.</p>
+          <a class="btn btn--sm btn--block" href="#" data-quote>Request a quote</a>
+        </div>
+      </aside>
+
+      <div>
+        <div class="toolbar">
+          <span class="count" data-count></span>
+          <label class="sr-only" for="sortby">Sort products</label>
+          <select id="sortby" data-sort>
+            <option value="popular">Sort: Most popular</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating">Customer rating</option>
+            <option value="name">Name: A–Z</option>
+          </select>
+        </div>
+        <div class="prodgrid" data-prodgrid></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div data-app-footer></div>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/art.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/category.js"></script>
+</body>
+</html>

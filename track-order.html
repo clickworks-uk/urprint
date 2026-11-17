@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track your order | UR Print Wolverhampton</title>
+<meta name="description" content="Check the progress of your UR Print order, or call the Wolverhampton unit on 01902 331074.">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-app-header></div>
+<main id="main">
+  <div class="pagehead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span class="sep">/</span><span class="current">Track order</span>
+      </nav>
+      <h1>Track your order</h1>
+      <p>Enter the reference from your confirmation email — it looks like <strong>URP-2026-1234</strong>.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="tracklayout" data-track-layout>
+      <div>
+        <form class="cocard" data-track-form novalidate style="margin-bottom:24px">
+          <div class="grid2">
+            <div class="field"><label for="t-ref">Order reference</label><input id="t-ref" name="ref" type="text" placeholder="URP-2026-1234"></div>
+            <div class="field"><label for="t-email">Email on the order</label><input id="t-email" name="email" type="email" placeholder="you@company.co.uk"></div>
+          </div>
+          <button class="btn" type="submit">Track order</button>
+          <div data-track-result style="margin-top:18px"></div>
+        </form>
+      </div>
+      <aside class="cocard">
+        <h2 style="font-size:1.05rem">Need it faster?</h2>
+        <p style="font-size:.9rem;color:var(--ink-60)">Call the unit and we will tell you exactly where your job is on the floor — proofing, press, finishing or packed.</p>
+        <a class="btn btn--block" href="tel:+441902331074">01902 331074</a>
+        <a class="btn btn--ghost btn--block" style="margin-top:10px" href="mailto:info@urprint.co.uk">info@urprint.co.uk</a>
+        <p class="formnote">Mon–Fri 8am–6pm · Sat 10am–4pm</p>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('[data-track-form]');
+    var out = document.querySelector('[data-track-result]');
+    var last = null;
+    try { last = JSON.parse(localStorage.getItem(window.URApp.ORDER_KEY)); } catch (e) {}
+    if (last) {
+      document.querySelector('#t-ref').value = last.ref;
+      document.querySelector('#t-email').value = last.email;
+    }
+    function stage(label, note, done, current) {
+      return '<li style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--grey-100)">' +
+        '<span style="width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;' +
+        'background:' + (done ? 'var(--teal)' : current ? 'var(--blue)' : 'var(--grey-100)') + ';color:#fff;font-size:.7rem;font-weight:800">' +
+        (done ? '✓' : '') + '</span><span><b style="display:block;font-size:.92rem">' + label + '</b>' +
+        '<span style="font-size:.82rem;color:var(--ink-60)">' + note + '</span></span></li>';
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ref = document.querySelector('#t-ref').value.trim();
+      if (!ref) { out.innerHTML = '<p class="error">Please enter your order reference.</p>'; return; }
+      if (last && ref.toUpperCase() === last.ref) {
+        out.innerHTML = '<div class="callout"><p><strong>' + last.ref + '</strong> — ' + last.items.length +
+          ' item(s), ' + window.URData.money(last.total) + ' including VAT.</p></div>' +
+          '<ul style="margin-top:8px">' +
+          stage('Order received', 'Payment confirmed and queued for pre-flight', true, false) +
+          stage('Artwork pre-flight', 'A member of our studio is checking your files', false, true) +
+          stage('On press', 'Printing at Unit 1 Ward Street', false, false) +
+          stage('Finishing', 'Trimming, laminating and quality check', false, false) +
+          stage(last.mode === 'collection' ? 'Ready to collect' : 'Dispatched',
+                last.mode === 'collection' ? 'We will text you when it is boxed' : 'Tracked courier, 2–3 working days', false, false) +
+          '</ul>';
+      } else {
+        out.innerHTML = '<div class="callout"><p>We could not find <strong>' + ref.replace(/[<>&]/g, '') +
+          '</strong> in this browser. This demonstration storefront only tracks orders placed in this session — ' +
+          'for a real order, call <a href="tel:+441902331074">01902 331074</a> and we will look it up.</p></div>';
+      }
+    });
+  });
+  </script>
+</main>
+<div data-app-footer></div>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/art.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
