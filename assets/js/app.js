@@ -275,7 +275,10 @@
       '<li><a href="mailto:' + CO.email + '">Contact us</a></li>' +
       '<li><a href="#">Delivery &amp; collection</a></li>' +
       '<li><a href="#">Returns &amp; reprints</a></li>' +
-      '<li><a href="#">Privacy &amp; terms</a></li></ul></div>' +
+      '<li><a href="privacy-policy.html">Privacy policy</a></li>' +
+      '<li><a href="cookie-policy.html">Cookie policy</a></li>' +
+      '<li><button type="button" class="footer__prefs" data-consent-open>Cookie preferences</button></li>' +
+      '</ul></div>' +
       '</div>' +
       '<div class="wrap footer__bottom">' +
       '<span>© ' + new Date().getFullYear() + ' ' + esc(CO.name) + ' · ' + esc(CO.addressLine) + ', ' + esc(CO.city) + ' ' + esc(CO.postcode) + ' · Prices shown include VAT at 20%</span>' +

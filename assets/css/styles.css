@@ -443,6 +443,9 @@ ul{margin:0;padding:0;list-style:none}
 .footer li{margin-bottom:9px}
 .footer__brand img{height:36px;margin-bottom:16px}
 .footer__brand p{font-size:.88rem;max-width:34ch}
+.footer__prefs{background:none;border:0;padding:0;font:inherit;color:rgba(255,255,255,.72);
+  text-decoration:none;cursor:pointer;text-align:left}
+.footer__prefs:hover{color:#fff;text-decoration:underline}
 .footer__social{display:flex;gap:10px;margin-top:16px}
 .footer__social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
 .footer__social a:hover{background:var(--blue)}
@@ -512,6 +515,78 @@ ul{margin:0;padding:0;list-style:none}
 .totals .row{display:flex;justify-content:space-between;padding:5px 0}
 .totals .row--total{border-top:1px solid var(--grey-200);margin-top:8px;padding-top:12px;font-size:1.1rem;font-weight:800;font-family:var(--font-display)}
 .totals .muted{color:var(--ink-60);font-size:.8rem}
+
+
+/* ==========================================================================
+   Cookie consent
+   Accept and Reject share one `.consent__btn` rule: identical size, weight,
+   radius and font. Only the fill differs, and both are solid — neither is
+   demoted to an outline or a muted tone. Do not restyle one without the
+   other; unequal prominence is a dark pattern and an ICO compliance issue.
+   ========================================================================== */
+.consent{
+  position:fixed;left:0;right:0;bottom:0;z-index:650;background:#fff;
+  border-top:1px solid var(--grey-200);box-shadow:0 -8px 32px rgba(26,31,43,.16);
+  transform:translateY(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+}
+.consent.is-on{transform:translateY(0)}
+.consent__inner{
+  max-width:var(--maxw);margin:0 auto;padding:20px var(--gutter);
+  display:flex;align-items:center;gap:28px;
+}
+.consent__copy{flex:1;min-width:0}
+.consent__title{font-size:1.02rem;margin:0 0 4px}
+.consent__copy p{margin:0;font-size:.88rem;color:var(--ink-60);max-width:78ch}
+.consent__actions{
+  flex:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;
+  width:min(380px,100%);
+}
+.consent__btn{width:100%;padding:13px 18px;font-size:.92rem;font-weight:600;border-radius:var(--radius)}
+[data-consent-reject].consent__btn{background:var(--ink);color:#fff;border-color:var(--ink)}
+[data-consent-reject].consent__btn:hover{background:#0d1118}
+[data-consent-accept].consent__btn{background:var(--blue);color:#fff;border-color:var(--blue)}
+[data-consent-accept].consent__btn:hover{background:var(--blue-dark)}
+.consent__link{
+  grid-column:1 / -1;background:none;border:0;padding:4px;font-size:.85rem;
+  font-weight:600;color:var(--ink-60);text-decoration:underline;justify-self:center;
+}
+.consent__link:hover{color:var(--blue)}
+@media(max-width:860px){
+  .consent__inner{flex-direction:column;align-items:stretch;gap:16px;padding:18px var(--gutter)}
+  .consent__actions{width:100%}
+}
+@media(max-width:420px){
+  .consent__actions{grid-template-columns:1fr}
+  .consent__link{grid-column:1}
+}
+
+/* preferences dialog */
+.consent-modal .modal__box{max-width:600px}
+.consent__cat{border-top:1px solid var(--grey-100);padding:16px 0}
+.consent__cat:first-of-type{border-top:0}
+.consent__cat-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:4px}
+.consent__cat h3{font-size:1rem;margin:0}
+.consent__cat p{font-size:.86rem;color:var(--ink-60);margin:0}
+.consent__always{font-size:.76rem;font-weight:700;color:#0a7a6d;white-space:nowrap}
+.consent__unused{margin-top:6px!important;font-size:.78rem!important;font-style:italic}
+.consent__switch{position:relative;display:inline-flex;flex:none;cursor:pointer}
+.consent__switch input{position:absolute;inset:0;z-index:1;opacity:0;width:46px;height:26px;margin:0;cursor:pointer}
+.consent__slider{
+  width:46px;height:26px;border-radius:13px;background:var(--grey-300);position:relative;transition:.16s;
+}
+.consent__slider::after{
+  content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:#fff;transition:.16s;box-shadow:var(--shadow-xs);
+}
+.consent__switch input:checked + .consent__slider{background:var(--blue)}
+.consent__switch input:checked + .consent__slider::after{transform:translateX(20px)}
+.consent__switch input:focus-visible + .consent__slider{outline:3px solid var(--blue);outline-offset:2px}
+.consent__prefs-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;
+  padding-top:18px;border-top:1px solid var(--grey-100);
+}
+.consent__prefs-actions [data-consent-save]{grid-column:1 / -1}
+@media(max-width:480px){.consent__prefs-actions{grid-template-columns:1fr}}
 
 /* ==========================================================================
    Modal
@@ -725,10 +800,15 @@ textarea{min-height:104px;resize:vertical}
    Content pages
    ========================================================================== */
 .prose{max-width:76ch;padding:36px 0 60px}
+.prose p a,.prose li a,.prose td a,.prose th a{text-decoration:underline;text-underline-offset:2px}
+.prose p a:hover,.prose li a:hover,.prose td a:hover{text-decoration-thickness:2px}
 .prose h2{margin-top:36px}
 .prose h3{margin-top:26px;font-size:1.08rem}
 .prose ul.bullets{list-style:disc;padding-left:22px;margin-bottom:1rem;color:var(--ink-80)}
 .prose ul.bullets li{margin-bottom:7px}
+.table-scroll{overflow-x:auto;margin:16px 0 24px;-webkit-overflow-scrolling:touch}
+.table-scroll:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.table-scroll table{margin:0;min-width:460px}
 .prose table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:.9rem}
 .prose th,.prose td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--grey-100)}
 .prose th{background:var(--grey-50);font-weight:700;font-size:.82rem;letter-spacing:.03em;text-transform:uppercase;color:var(--grey-600)}
