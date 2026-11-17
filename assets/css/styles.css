@@ -124,6 +124,7 @@ ul{margin:0;padding:0;list-style:none}
 
 /* inline icons never inherit the full-bleed svg sizing */
 .btn svg{width:18px;height:18px;flex:none}
+.turnaround svg,.trustline svg,.lineitem svg,.hint svg{flex:none}
 .btn--lg svg{width:20px;height:20px}
 .btn--sm svg{width:15px;height:15px}
 .maplink .bar svg{width:16px;height:16px;flex:none}
@@ -619,6 +620,7 @@ textarea{min-height:104px;resize:vertical}
 .config__head .pcard__cat{margin-bottom:6px}
 .config__head h1{font-size:1.55rem;margin:0 0 8px}
 .config__rating{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--ink-60)}
+.config__rating svg{width:16px;height:16px;flex:none;color:var(--teal)}
 .config__body{padding:20px 24px}
 .optgroup{margin-bottom:20px}
 .optgroup__label{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
