@@ -282,12 +282,18 @@
       '</div>' +
       '<div class="wrap footer__bottom">' +
       '<span>© ' + new Date().getFullYear() + ' ' + esc(CO.name) + ' · ' + esc(CO.addressLine) + ', ' + esc(CO.city) + ' ' + esc(CO.postcode) + ' · Prices shown include VAT at 20%</span>' +
-      '<div class="payicons"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>APPLE&nbsp;PAY</span><span>KLARNA</span></div>' +
+      '<ul class="payicons" aria-label="Payment methods">' +
+      '<li><picture><source srcset="assets/img/pay/visa.webp" type="image/webp"><img src="assets/img/pay/visa.png" alt="Visa" height="96" loading="lazy" decoding="async"></picture></li>' +
+      '<li><picture><source srcset="assets/img/pay/mastercard.webp" type="image/webp"><img src="assets/img/pay/mastercard.png" alt="Mastercard" height="96" loading="lazy" decoding="async"></picture></li>' +
+      '<li><picture><source srcset="assets/img/pay/amex.webp" type="image/webp"><img src="assets/img/pay/amex.png" alt="American Express" height="96" loading="lazy" decoding="async"></picture></li>' +
+      '<li><picture><source srcset="assets/img/pay/paypal.webp" type="image/webp"><img src="assets/img/pay/paypal.png" alt="PayPal" height="96" loading="lazy" decoding="async"></picture></li>' +
+      '<li><picture><source srcset="assets/img/pay/apple-pay.webp" type="image/webp"><img src="assets/img/pay/apple-pay.png" alt="Apple Pay" height="96" loading="lazy" decoding="async"></picture></li>' +
+      '</ul>' +
       '</div></div></footer>';
   }
 
   function miniMap() {
-    return '<svg viewBox="0 0 400 150" role="img" aria-label="Map showing Unit 1 Ward Street, Wolverhampton" preserveAspectRatio="none" style="height:120px;width:100%">' +
+    return '<svg viewBox="0 0 400 150" role="img" aria-label="Map showing Unit 1 Ward Street, Wolverhampton" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block">' +
       '<rect width="400" height="150" fill="#EAEEF3"/>' +
       '<path d="M0 96h400M0 42h400M74 0v150M246 0v150" stroke="#fff" stroke-width="9"/>' +
       '<path d="M0 96h400M0 42h400M74 0v150M246 0v150" stroke="#DCE2EA" stroke-width="1"/>' +
