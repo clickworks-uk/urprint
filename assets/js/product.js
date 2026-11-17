@@ -8,6 +8,7 @@
 
   var p = D.getProduct(App.param('p'));
   if (!p) {
+    qs('[data-pdp]').hidden = true;
     qs('[data-notfound]').hidden = false;
     qs('[data-crumbs]').innerHTML = '<a href="index.html">Home</a><span class="sep">/</span><span class="current">Not found</span>';
     return;
@@ -15,10 +16,19 @@
   var cat = D.getCategory(p.cat);
   var subName = (cat.subs.filter(function (s) { return s.slug === p.sub; })[0] || {}).name || '';
 
-  qs('[data-pdp]').hidden = false;
-  document.title = p.name + ' | UR Print Wolverhampton';
-  var md = document.querySelector('meta[name=description]');
-  if (md) md.setAttribute('content', p.blurb + ' ' + D.fromLabel(p) + ' incl. VAT. Printed in Wolverhampton.');
+  App.setPageMeta({
+    title: p.name + ' | UR Print Wolverhampton',
+    description: p.blurb + ' ' + D.fromLabel(p) + ' incl. VAT. Printed in Wolverhampton, free local collection or UK-wide delivery.',
+    path: 'product.html?p=' + p.slug,
+    breadcrumbs: [
+      { name: 'Home', path: '' },
+      { name: cat.name, path: 'category.html?c=' + cat.slug }
+    ].concat(
+      /* some products share their sub-category's name — do not repeat it */
+      subName && subName !== p.name
+        ? [{ name: subName, path: 'category.html?c=' + cat.slug + '&s=' + p.sub }] : []
+    ).concat([{ name: p.name, path: 'product.html?p=' + p.slug }])
+  });
 
   /* ------------------------------------------------------------ state --- */
   var sel = D.defaultSelection(p);
@@ -39,17 +49,8 @@
     D.productsIn(p.cat).filter(function (x) { return x.slug !== p.slug; }).slice(0, 2).map(function (x) { return x.art; })
   ).filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 4);
 
-  function badgeClass(b) {
-    if (/same-day|fast/i.test(b)) return 'badge--amber';
-    if (/premium|trade/i.test(b)) return 'badge--ink';
-    if (/free|no minimum/i.test(b)) return 'badge--blue';
-    return '';
-  }
   function paintGallery(idx) {
-    qs('[data-gallery-main]').innerHTML = Art.get(galleryArts[idx]) +
-      (p.badges.length ? '<div class="gallery__badges">' + p.badges.map(function (b) {
-        return '<span class="badge ' + badgeClass(b) + '">' + esc(b) + '</span>';
-      }).join('') + '</div>' : '');
+    qs('[data-gallery-main]').innerHTML = Art.get(galleryArts[idx]);
     qsa('[data-gallery-thumbs] button').forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
   }
   qs('[data-gallery-thumbs]').innerHTML = galleryArts.map(function (a, i) {
@@ -63,8 +64,7 @@
   /* -------------------------------------------------------------- head -- */
   qs('[data-cfg-cat]').textContent = cat.name + ' · ' + subName;
   qs('[data-cfg-title]').textContent = p.name;
-  qs('[data-cfg-rating]').innerHTML = '<span class="stars">' + App.stars(p.rating) + '</span>' +
-    '<strong>' + p.rating.toFixed(1) + '</strong> · ' + p.reviews + ' reviews · ' + esc(p.turnaround);
+  qs('[data-cfg-rating]').innerHTML = I.clock + ' ' + esc(p.turnaround);
   qs('[data-specs]').innerHTML = p.specs.map(function (s) { return '<li>' + I.check + '<span>' + esc(s) + '</span></li>'; }).join('');
   qs('[data-turnaround]').innerHTML = I.clock + ' ' + esc(p.turnaround) + ' · Free collection from Ward Street';
   if (p.priceNote) qs('[data-pricenote]').innerHTML = '<div class="callout"><p>' + esc(p.priceNote) +
@@ -230,11 +230,7 @@
   repaint(false);
 
   /* ----------------------------------------------------------- related -- */
-  var related = D.productsIn(p.cat).filter(function (x) { return x.slug !== p.slug; });
-  D.PRODUCTS.forEach(function (x) {
-    if (related.length < 3 && x.cat !== p.cat && x.badges.indexOf('Bestseller') > -1) related.push(x);
-  });
-  related = related.slice(0, 3);
+  var related = D.productsIn(p.cat).filter(function (x) { return x.slug !== p.slug; }).slice(0, 3);
   if (related.length) {
     qs('[data-related-section]').hidden = false;
     qs('[data-related]').innerHTML = related.map(function (r) {

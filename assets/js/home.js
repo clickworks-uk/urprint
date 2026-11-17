@@ -22,14 +22,11 @@
     return '<figure>' + Art.get(c.art) + '<figcaption>' + esc(c.cap) + '</figcaption></figure>';
   }).join('');
 
-  qs('[data-hero-float]').innerHTML = I.bolt +
-    '<div><b>Same-day collection</b><span>On banners &amp; boards, artwork in by 11am</span></div>';
-
   /* ---------------------------------------------------- value strip ------ */
   qs('[data-value-strip]').innerHTML = [
     { icon: I.factory, h: 'In-house Wolverhampton production', p: 'Printed, finished and quality-checked at Unit 1 Ward Street — with free click-and-collect when you are passing.' },
     { icon: I.upload, h: 'Upload artwork or get design help', p: 'Drop in a print-ready PDF, AI, EPS or PNG, or hand it to our in-house studio from £15 and approve a proof.' },
-    { icon: I.star, h: 'Rated 4.8★ locally', p: 'Trusted by 312 Wolverhampton and West Midlands businesses, from corner shops to national contractors.' }
+    { icon: I.pin, h: 'Collect in Wolverhampton', p: 'Unit 1 Ward Street, WV1 3LT. Open Monday to Friday 8am–6pm and Saturday 10am–4pm.' }
   ].map(function (v) {
     return '<article class="vcard"><div class="vcard__icon">' + v.icon + '</div>' +
       '<div><h3>' + esc(v.h) + '</h3><p>' + esc(v.p) + '</p></div></article>';
@@ -44,12 +41,6 @@
   }).join('');
 
   /* ------------------------------------------------------- bestsellers --- */
-  function badgeClass(b) {
-    if (/same-day|fast/i.test(b)) return 'badge--amber';
-    if (/premium|trade/i.test(b)) return 'badge--ink';
-    if (/free|no minimum/i.test(b)) return 'badge--blue';
-    return '';
-  }
   function priceBlock(p) {
     var f = D.fromParts(p);
     return '<div class="pcard__price">' + (f.qty ? '<span class="qty">' + esc(f.qty) + '</span>' : '') +
@@ -58,16 +49,11 @@
   function card(p) {
     var cat = D.getCategory(p.cat);
     return '<a class="pcard" href="product.html?p=' + p.slug + '">' +
-      '<div class="pcard__media">' + Art.get(p.art) +
-      (p.badges.length ? '<div class="pcard__badges">' + p.badges.map(function (b) {
-        return '<span class="badge ' + badgeClass(b) + '">' + esc(b) + '</span>';
-      }).join('') + '</div>' : '') +
-      '</div>' +
+      '<div class="pcard__media">' + Art.get(p.art) + '</div>' +
       '<div class="pcard__body">' +
       '<span class="pcard__cat">' + esc(cat.name) + '</span>' +
       '<h3 class="pcard__title">' + esc(p.name) + '</h3>' +
       '<p class="pcard__blurb">' + esc(p.blurb) + '</p>' +
-      '<div class="pcard__rating"><span class="stars">' + App.stars(p.rating) + '</span>' + p.rating.toFixed(1) + ' (' + p.reviews + ')</div>' +
       priceBlock(p) +
       '<div class="pcard__foot"><span class="btn btn--sm">Configure &amp; order</span></div>' +
       '</div></a>';
@@ -105,29 +91,4 @@
     '<div style="border-radius:12px;overflow:hidden">' + Art.get('a-board') + '</div>' +
     '</div></div>';
 
-  /* ----------------------------------------------------------- reviews --- */
-  var REVIEWS = [
-    { n: 'Hardeep S.', b: 'Sandwell Autocare', t: 'Needed 2,000 flyers and a pull-up banner for a trade day with four days\' notice. Both were ready in two and the banner is still going strong a year later.' },
-    { n: 'Marie T.', b: 'The Lilac Room, Tettenhall', t: 'They surveyed the shop front on the Tuesday, sent a visual on the Wednesday and fitted the sign the following week. Spotless job and no mess left behind.' },
-    { n: 'Jas K.', b: 'Kings Catering Supplies', t: 'We get our NCR pads and menus reprinted here every few months. Artwork is kept on file so a reorder is one phone call.' },
-    { n: 'Dan W.', b: 'Wolves Scaffolding Ltd', t: 'Fifty hi-vis vests and two vans lettered. Pricing was clear, no surprises, and they worked around our site hours.' },
-    { n: 'Priya N.', b: 'Nova Beauty Studio', t: 'The velvet soft-touch cards are beautiful — clients comment on them. Worth the extra over the standard ones.' },
-    { n: 'Steve B.', b: 'Bilston Road Motors', t: 'Rang at 9am about a replacement A-board panel, collected it the same afternoon. Proper local service.' }
-  ];
-  qs('[data-reviews]').innerHTML =
-    '<div class="googlecard">' +
-    '<div class="googlecard__score">4.8</div>' +
-    '<div class="stars">★★★★★</div>' +
-    '<p>Based on <strong>312 reviews</strong> from Wolverhampton and the wider West Midlands</p>' +
-    '<div class="googlecard__g">' +
-    '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6"/><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3C3.7 21.4 7.6 24 12 24"/><path fill="#FBBC05" d="M5.6 14.7a7.2 7.2 0 0 1 0-4.6v-3H1.8a12 12 0 0 0 0 10.6z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.2.6 4.4 1.7l3.3-3.3C17.7 1.3 15.1 0 12 0 7.6 0 3.7 2.6 1.8 6.3l3.8 3c.9-2.8 3.4-4.5 6.4-4.5"/></svg>' +
-    'Google reviews</div>' +
-    '<p class="formnote" style="margin-top:14px">Opening hours: Mon–Fri 8am–6pm · Sat 10am–4pm</p>' +
-    '</div>' +
-    '<div class="reviewgrid">' + REVIEWS.map(function (r) {
-      return '<article class="review"><div class="stars">★★★★★</div>' +
-        '<blockquote>“' + esc(r.t) + '”</blockquote>' +
-        '<div class="review__who"><span class="review__avatar">' + esc(r.n.charAt(0)) + '</span>' +
-        '<span><b>' + esc(r.n) + '</b><span>' + esc(r.b) + '</span></span></div></article>';
-    }).join('') + '</div>';
 })();

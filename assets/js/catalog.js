@@ -14,8 +14,6 @@
     phoneHref: 'tel:+441902331074',
     email: 'info@urprint.co.uk',
     mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Unit+1+Ward+Street+Wolverhampton+WV1+3LT',
-    rating: 4.8,
-    reviewCount: 312,
     hours: [
       { d: 'Monday – Friday', h: '8:00am – 6:00pm' },
       { d: 'Saturday', h: '10:00am – 4:00pm' },
@@ -59,7 +57,7 @@
         { slug: 'rounded-corner', name: 'Rounded Corner' },
         { slug: 'spot-uv', name: 'Spot UV' }
       ],
-      promo: { badge: 'Bestseller', title: '500 Matt Laminated Cards', text: 'Scuff-resistant matt lamination on 400gsm silk — from £32.99 incl. VAT.', art: 'matt-lam', href: 'product.html?p=matt-laminated-business-cards' }
+      promo: { title: '500 Matt Laminated Cards', text: 'Scuff-resistant matt lamination on 400gsm silk — from £32.99 incl. VAT.', art: 'matt-lam', href: 'product.html?p=matt-laminated-business-cards' }
     },
     {
       slug: 'flyers-leaflets', name: 'Flyers & Leaflets', art: 'flyers',
@@ -72,7 +70,7 @@
         { slug: 'postcards', name: 'Postcards' },
         { slug: 'booklets', name: 'Booklets & Brochures' }
       ],
-      promo: { badge: 'Fast turnaround', title: '1000 A5 Flyers', text: 'Full colour, double sided, 170gsm gloss — from £29.99 incl. VAT.', art: 'flyers', href: 'product.html?p=a5-flyers' }
+      promo: { title: '1000 A5 Flyers', text: 'Full colour, double sided, 170gsm gloss — from £29.99 incl. VAT.', art: 'flyers', href: 'product.html?p=a5-flyers' }
     },
     {
       slug: 'signs-shop-fronts', name: 'Signs & Shop Fronts', art: 'signs',
@@ -84,7 +82,7 @@
         { slug: 'rigid-boards', name: 'Foamex & Correx Boards' },
         { slug: 'a-boards', name: 'A-Boards' }
       ],
-      promo: { badge: 'Free site survey', title: 'Shop front signage', text: 'Survey, design visual, manufacture and fit — all from one Wolverhampton unit.', art: 'signs', href: '#quote' }
+      promo: { title: 'Shop front signage', text: 'Survey, design visual, manufacture and fit — all from one Wolverhampton unit.', art: 'signs', href: '#quote' }
     },
     {
       slug: 'banners-displays', name: 'Banners & Displays', art: 'banners',
@@ -96,7 +94,7 @@
         { slug: 'mesh-banners', name: 'Mesh Banners' },
         { slug: 'event-displays', name: 'Event Displays' }
       ],
-      promo: { badge: 'Same-day available', title: '850mm Roller Banner', text: 'Printed, assembled and collected the same day — from £39.99 incl. VAT.', art: 'roller-banner', href: 'product.html?p=roller-banners' }
+      promo: { title: '850mm Roller Banner', text: 'Printed, assembled and collected the same day — from £39.99 incl. VAT.', art: 'roller-banner', href: 'product.html?p=roller-banners' }
     },
     {
       slug: 'stickers-labels', name: 'Stickers & Labels', art: 'stickers',
@@ -108,7 +106,7 @@
         { slug: 'product-labels', name: 'Product Labels' },
         { slug: 'vehicle-graphics', name: 'Vehicle Graphics' }
       ],
-      promo: { badge: 'Bestseller', title: 'Die-cut vinyl stickers', text: 'Any shape, weatherproof laminate — 250 from £34.99 incl. VAT.', art: 'die-cut', href: 'product.html?p=die-cut-stickers' }
+      promo: { title: 'Die-cut vinyl stickers', text: 'Any shape, weatherproof laminate — 250 from £34.99 incl. VAT.', art: 'die-cut', href: 'product.html?p=die-cut-stickers' }
     },
     {
       slug: 'workwear-promo', name: 'Workwear & Promo', art: 'workwear',
@@ -121,7 +119,7 @@
         { slug: 'hi-vis', name: 'Hi-Vis Workwear' },
         { slug: 'promo', name: 'Tote Bags & Mugs' }
       ],
-      promo: { badge: 'No minimum order', title: 'Embroidered polos', text: 'Digitised logo setup included on orders of 10+ garments.', art: 'polo', href: 'product.html?p=embroidered-polo-shirts' }
+      promo: { title: 'Embroidered polos', text: 'Digitised logo setup included on orders of 10+ garments.', art: 'polo', href: 'product.html?p=embroidered-polo-shirts' }
     },
     {
       slug: 'stationery-packaging', name: 'Stationery & Packaging', art: 'stationery',
@@ -133,7 +131,7 @@
         { slug: 'ncr-pads', name: 'NCR Invoice Pads' },
         { slug: 'boxes', name: 'Branded Boxes' }
       ],
-      promo: { badge: 'Trade accounts', title: 'Business stationery set', text: 'Letterheads, comp slips and cards printed to match, billed monthly.', art: 'letterhead', href: 'category.html?c=stationery-packaging' }
+      promo: { title: 'Business stationery set', text: 'Letterheads, comp slips and cards printed to match, billed monthly.', art: 'letterhead', href: 'category.html?c=stationery-packaging' }
     }
   ];
 
@@ -143,7 +141,7 @@
     /* ---------------------------------------------- 1. BUSINESS CARDS ------ */
     {
       slug: 'standard-business-cards', headlineQty: 100, name: 'Standard Business Cards', cat: 'business-cards', sub: 'standard',
-      art: 'business-cards', badges: ['Bestseller'], rating: 4.9, reviews: 184, unit: 'card',
+      art: 'business-cards', unit: 'card',
       blurb: 'Full colour on 400gsm silk board — the everyday workhorse card.',
       turnaround: 'Ready in 2 working days',
       specs: ['400gsm silk or uncoated board', 'Full colour litho/digital print', 'Guillotined to ±0.5mm', 'Free artwork pre-flight check'],
@@ -170,7 +168,7 @@
     },
     {
       slug: 'matt-laminated-business-cards', headlineQty: 500, name: 'Matt Laminated Business Cards', cat: 'business-cards', sub: 'matt-laminated',
-      art: 'matt-lam', badges: ['Bestseller'], rating: 4.9, reviews: 142, unit: 'card',
+      art: 'matt-lam', unit: 'card',
       blurb: 'Scuff-resistant matt film on both sides — deep, modern and fingerprint-friendly.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['400gsm silk with matt lamination', 'Resists scuffing and creasing', 'Rich, non-reflective blacks', 'Pairs with spot UV for contrast'],
@@ -184,7 +182,7 @@
     },
     {
       slug: 'soft-touch-business-cards', name: 'Velvet Soft-Touch Business Cards', cat: 'business-cards', sub: 'soft-touch',
-      art: 'soft-touch', badges: ['Premium'], rating: 5.0, reviews: 76, unit: 'card',
+      art: 'soft-touch', unit: 'card',
       blurb: 'A suede-like velvet laminate that makes people hold on to the card.',
       turnaround: 'Ready in 3 working days',
       specs: ['450gsm board with velvet laminate', 'Peach-skin tactile finish', 'Optional raised spot UV', 'Ideal for studios, salons and consultants'],
@@ -198,7 +196,7 @@
     },
     {
       slug: 'rounded-corner-business-cards', name: 'Rounded Corner Business Cards', cat: 'business-cards', sub: 'rounded-corner',
-      art: 'rounded-corner', badges: [], rating: 4.8, reviews: 61, unit: 'card',
+      art: 'rounded-corner', unit: 'card',
       blurb: 'Die-cut 3mm or 6mm radius corners — softer in the pocket, harder to ignore.',
       turnaround: 'Ready in 3 working days',
       specs: ['Precision die-cut corners', '400gsm silk as standard', 'Choose 3mm or 6mm radius', 'Laminate recommended for durability'],
@@ -213,7 +211,7 @@
     },
     {
       slug: 'spot-uv-business-cards', name: 'Spot UV Business Cards', cat: 'business-cards', sub: 'spot-uv',
-      art: 'spot-uv', badges: ['Premium'], rating: 4.9, reviews: 53, unit: 'card',
+      art: 'spot-uv', unit: 'card',
       blurb: 'Raised, high-gloss varnish on a matt base — logos that catch the light.',
       turnaround: 'Ready in 3–4 working days',
       specs: ['Raised UV varnish to 30 micron', 'Matt laminated base stock', 'Single or double sided UV', 'Supply a separate 100% K spot layer'],
@@ -229,7 +227,7 @@
     /* ------------------------------------------- 2. FLYERS & LEAFLETS ------ */
     {
       slug: 'a5-flyers', headlineQty: 1000, name: 'A5 Flyers', cat: 'flyers-leaflets', sub: 'flat-flyers',
-      art: 'flyers', badges: ['Bestseller', 'Fast turnaround'], rating: 4.8, reviews: 203, unit: 'flyer',
+      art: 'flyers', unit: 'flyer',
       blurb: 'Full colour flat flyers on gloss, silk or uncoated — ideal for leaflet drops.',
       turnaround: 'Ready in 2 working days',
       specs: ['130–400gsm stocks', 'Full bleed, trimmed to size', 'Litho printed above 2,500', 'Bulk leaflet distribution available'],
@@ -250,7 +248,7 @@
     },
     {
       slug: 'folded-leaflets', name: 'Folded Leaflets', cat: 'flyers-leaflets', sub: 'folded-leaflets',
-      art: 'folded-leaflet', badges: [], rating: 4.7, reviews: 88, unit: 'leaflet',
+      art: 'folded-leaflet', unit: 'leaflet',
       blurb: 'Creased and machine-folded — tri-fold, half-fold, Z-fold and roll-fold.',
       turnaround: 'Ready in 3 working days',
       specs: ['Creased before folding to avoid cracking', 'Up to 300gsm folded stock', 'Tri-fold, Z-fold, half or roll fold', 'Supplied flat-packed in boxes'],
@@ -264,7 +262,7 @@
     },
     {
       slug: 'takeaway-menus', headlineQty: 500, name: 'Takeaway Menus', cat: 'flyers-leaflets', sub: 'menus',
-      art: 'menu', badges: ['Fast turnaround'], rating: 4.8, reviews: 97, unit: 'menu',
+      art: 'menu', unit: 'menu',
       blurb: 'Wipe-clean laminated menus and letterbox takeaway leaflets.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['Gloss or matt encapsulation available', 'A4, A3 and DL letterbox sizes', 'Reprints kept on file for 24 months', 'Free delivery across Wolverhampton'],
@@ -278,7 +276,7 @@
     },
     {
       slug: 'postcards', name: 'Printed Postcards', cat: 'flyers-leaflets', sub: 'postcards',
-      art: 'postcard', badges: [], rating: 4.7, reviews: 54, unit: 'postcard',
+      art: 'postcard', unit: 'postcard',
       blurb: 'Heavy card postcards for direct mail, loyalty schemes and thank-you notes.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['350–400gsm card as standard', 'Uncoated reverse for handwriting', 'Royal Mail mailing sizes', 'Address data mail-merge available'],
@@ -292,7 +290,7 @@
     },
     {
       slug: 'booklets-brochures', name: 'Booklets & Brochures', cat: 'flyers-leaflets', sub: 'booklets',
-      art: 'booklet', badges: [], rating: 4.9, reviews: 42, unit: 'booklet',
+      art: 'booklet', unit: 'booklet',
       blurb: 'Saddle-stitched or wiro-bound, 8 to 64 pages, printed and finished in-house.',
       turnaround: 'Ready in 4–5 working days',
       specs: ['Saddle stitch, wiro or perfect bound', 'Separate cover stock available', 'Page counts in multiples of 4', 'Digital proof before production'],
@@ -308,7 +306,7 @@
     /* ------------------------------------------ 3. SIGNS & SHOP FRONTS ----- */
     {
       slug: 'shop-fascia-signs', name: 'Shop Fascia Signs', cat: 'signs-shop-fronts', sub: 'fascia',
-      art: 'signs', badges: ['Free site survey'], rating: 5.0, reviews: 68, unit: 'sign',
+      art: 'signs', unit: 'sign',
       blurb: 'Aluminium tray and flat panel fascias, built, delivered and fitted by our team.',
       turnaround: 'Survey to fit: 7–10 working days',
       specs: ['3mm aluminium composite or tray', 'Optional LED halo or trough lighting', 'Survey, manufacture and installation', 'Covered by our 3-year outdoor warranty'],
@@ -335,7 +333,7 @@
     },
     {
       slug: 'window-graphics', name: 'Window Graphics & Decals', cat: 'signs-shop-fronts', sub: 'window-graphics',
-      art: 'window-graphics', badges: [], rating: 4.9, reviews: 74, unit: 'm²',
+      art: 'window-graphics', unit: 'm²',
       blurb: 'Frosted manifestation, cut vinyl lettering and full-colour window wraps.',
       turnaround: 'Ready in 3–4 working days',
       specs: ['Cast or monomeric vinyl', 'Frosted, one-way vision or solid colour', 'Application tape supplied free', 'Fitting available across the West Midlands'],
@@ -356,7 +354,7 @@
     },
     {
       slug: 'foamex-correx-boards', headlineQty: 1, name: 'Foamex & Correx Boards', cat: 'signs-shop-fronts', sub: 'rigid-boards',
-      art: 'foamex', badges: ['Fast turnaround'], rating: 4.8, reviews: 91, unit: 'board',
+      art: 'foamex', unit: 'board',
       blurb: 'Rigid printed boards for site hoardings, estate agents and safety signage.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['3mm & 5mm Foamex PVC, 4mm Correx', 'Direct-to-substrate UV printing', 'Drilled holes or stake slots free', 'Weatherproof for 3+ years outdoors'],
@@ -378,7 +376,7 @@
     },
     {
       slug: 'a-boards', name: 'Pavement A-Boards', cat: 'signs-shop-fronts', sub: 'a-boards',
-      art: 'a-board', badges: [], rating: 4.7, reviews: 46, unit: 'board',
+      art: 'a-board', unit: 'board',
       blurb: 'Water-base and swing-frame pavement signs with printed panels.',
       turnaround: 'Ready in 3 working days',
       specs: ['Water or sand weighted base', 'Swing or snap frame options', 'Replacement panels available', 'Wind-resistant for high streets'],
@@ -393,7 +391,7 @@
     /* ------------------------------------------ 4. BANNERS & DISPLAYS ------ */
     {
       slug: 'pvc-vinyl-banners', headlineQty: 1, name: 'PVC Vinyl Banners', cat: 'banners-displays', sub: 'pvc-banners',
-      art: 'pvc-banner', badges: ['Bestseller'], rating: 4.9, reviews: 156, unit: 'banner',
+      art: 'pvc-banner', unit: 'banner',
       blurb: '510gsm PVC with welded hems and brass eyelets — built to survive a British winter.',
       turnaround: 'Ready in 1–2 working days',
       specs: ['440gsm or 510gsm PVC', 'Welded hems, brass eyelets every 500mm', 'UV-stable inks, 3+ years outdoors', 'Rope and cable ties available'],
@@ -410,7 +408,7 @@
     },
     {
       slug: 'roller-banners', name: 'Roller / Pull-Up Banners', cat: 'banners-displays', sub: 'roller-banners',
-      art: 'roller-banner', badges: ['Bestseller', 'Same-day available'], rating: 4.9, reviews: 211, unit: 'banner',
+      art: 'roller-banner', unit: 'banner',
       blurb: 'Printed graphic, cassette, pole and padded bag — assembled and ready to collect.',
       turnaround: 'Same-day collection available',
       specs: ['Anti-curl 220 micron display film', 'Aluminium cassette with 3-piece pole', 'Padded carry bag included', 'Replacement graphics available'],
@@ -428,7 +426,7 @@
     },
     {
       slug: 'mesh-banners', name: 'Mesh Banners', cat: 'banners-displays', sub: 'mesh-banners',
-      art: 'mesh-banner', badges: [], rating: 4.8, reviews: 37, unit: 'banner',
+      art: 'mesh-banner', unit: 'banner',
       blurb: 'Wind-permeable mesh for scaffolding, fencing and exposed building frontages.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['370gsm printed mesh', '70/30 wind permeability', 'Reinforced hems and eyelets', 'Fire-retardant option available'],
@@ -441,7 +439,7 @@
     },
     {
       slug: 'event-displays', name: 'Event Display Stands', cat: 'banners-displays', sub: 'event-displays',
-      art: 'event-display', badges: [], rating: 4.8, reviews: 29, unit: 'stand',
+      art: 'event-display', unit: 'stand',
       blurb: 'Pop-up walls, fabric backdrops and counters for exhibitions and open days.',
       turnaround: 'Ready in 5 working days',
       specs: ['Straight or curved pop-up frames', 'Tension fabric or panel graphics', 'Wheeled case with counter wrap', 'Graphics replaceable season to season'],
@@ -456,7 +454,7 @@
     /* -------------------------------------------- 5. STICKERS & LABELS ----- */
     {
       slug: 'die-cut-stickers', headlineQty: 250, name: 'Custom Die-Cut Stickers', cat: 'stickers-labels', sub: 'die-cut',
-      art: 'die-cut', badges: ['Bestseller'], rating: 4.9, reviews: 168, unit: 'sticker',
+      art: 'die-cut', unit: 'sticker',
       blurb: 'Contour-cut to any shape, on weatherproof vinyl with optional laminate.',
       turnaround: 'Ready in 2–3 working days',
       specs: ['Printed on white or clear vinyl', 'Cut to your exact outline', 'Dishwasher and outdoor safe with laminate', 'Supplied kiss-cut on sheets or singles'],
@@ -476,7 +474,7 @@
     },
     {
       slug: 'sticker-rolls', name: 'Sticker Rolls', cat: 'stickers-labels', sub: 'sticker-rolls',
-      art: 'sticker-roll', badges: [], rating: 4.8, reviews: 52, unit: 'label',
+      art: 'sticker-roll', unit: 'label',
       blurb: 'Roll-fed labels for packing benches, applicators and high-volume dispatch.',
       turnaround: 'Ready in 4 working days',
       specs: ['76mm or 25mm core', 'Wound out or wound in', 'Up to 5,000 labels per roll', 'Gap or black-mark sensing available'],
@@ -489,7 +487,7 @@
     },
     {
       slug: 'product-labels', name: 'Product Labels', cat: 'stickers-labels', sub: 'product-labels',
-      art: 'product-label', badges: [], rating: 4.9, reviews: 64, unit: 'label',
+      art: 'product-label', unit: 'label',
       blurb: 'Food, drink and cosmetic labels with laminates rated for fridge and freezer.',
       turnaround: 'Ready in 3–4 working days',
       specs: ['Food-safe adhesives', 'Freezer and wet-wipe rated laminates', 'Rectangle, oval or custom shape', 'Barcode and batch numbering available'],
@@ -502,7 +500,7 @@
     },
     {
       slug: 'vehicle-graphics', name: 'Vehicle Graphics & Lettering', cat: 'stickers-labels', sub: 'vehicle-graphics',
-      art: 'vehicle', badges: ['Free site survey'], rating: 5.0, reviews: 83, unit: 'vehicle',
+      art: 'vehicle', unit: 'vehicle',
       blurb: 'Cut lettering, half wraps and full wraps applied at our Ward Street unit.',
       turnaround: 'Booked in: 3–7 working days',
       specs: ['Cast vinyl with air-release liner', 'Fitted indoors at Ward Street', 'Removable without paint damage', 'Fleet pricing on 3+ vehicles'],
@@ -525,7 +523,7 @@
     /* --------------------------------------------- 6. WORKWEAR & PROMO ----- */
     {
       slug: 'printed-t-shirts', headlineQty: 10, name: 'Printed T-Shirts', cat: 'workwear-promo', sub: 't-shirts',
-      art: 'tshirt', badges: ['No minimum order'], rating: 4.8, reviews: 127, unit: 'shirt',
+      art: 'tshirt', unit: 'shirt',
       blurb: 'DTF and screen printed tees on Gildan, Fruit of the Loom and AWDis blanks.',
       turnaround: 'Ready in 3–4 working days',
       specs: ['Sizes XS–5XL, no size surcharge to 2XL', 'Wash-tested to 40°C', 'Front, back and sleeve positions', 'Mixed sizes within one order'],
@@ -538,7 +536,7 @@
     },
     {
       slug: 'embroidered-polo-shirts', headlineQty: 10, name: 'Embroidered Polo Shirts', cat: 'workwear-promo', sub: 'polo-shirts',
-      art: 'polo', badges: ['Bestseller'], rating: 4.9, reviews: 143, unit: 'polo',
+      art: 'polo', unit: 'polo',
       blurb: 'Stitched left-chest logos on hard-wearing poly-cotton polos.',
       turnaround: 'Ready in 4–5 working days',
       specs: ['Free logo digitising on 10+ garments', 'Up to 12 thread colours', '220gsm poly-cotton pique', 'Named garments available'],
@@ -551,7 +549,7 @@
     },
     {
       slug: 'printed-hoodies', name: 'Printed & Embroidered Hoodies', cat: 'workwear-promo', sub: 'hoodies',
-      art: 'hoodie', badges: [], rating: 4.9, reviews: 96, unit: 'hoodie',
+      art: 'hoodie', unit: 'hoodie',
       blurb: 'Heavyweight hoodies for site crews, staff teams and leavers.',
       turnaround: 'Ready in 4–5 working days',
       specs: ['280–350gsm brushed fleece', 'Pullover or full-zip', 'Embroidery or DTF print', 'Back prints up to A3'],
@@ -564,7 +562,7 @@
     },
     {
       slug: 'hi-vis-workwear', name: 'Hi-Vis Workwear', cat: 'workwear-promo', sub: 'hi-vis',
-      art: 'hivis', badges: [], rating: 4.8, reviews: 71, unit: 'item',
+      art: 'hivis', unit: 'item',
       blurb: 'EN ISO 20471 vests, polos and softshells printed with your company name.',
       turnaround: 'Ready in 3–4 working days',
       specs: ['EN ISO 20471 certified garments', 'Class 1, 2 and 3 options', 'Heat-sealed print, no stitching through tape', 'Site-ready same week'],
@@ -577,7 +575,7 @@
     },
     {
       slug: 'tote-bags-mugs', name: 'Tote Bags & Printed Mugs', cat: 'workwear-promo', sub: 'promo',
-      art: 'tote-mug', badges: [], rating: 4.7, reviews: 58, unit: 'item',
+      art: 'tote-mug', unit: 'item',
       blurb: 'Branded giveaways for open days, markets and welcome packs.',
       turnaround: 'Ready in 3–5 working days',
       specs: ['Cotton totes in natural, black and navy', 'Dishwasher-safe mug printing', 'Full colour wrap or single colour', 'Gift boxes available for mugs'],
@@ -592,7 +590,7 @@
     /* --------------------------------------- 7. STATIONERY & PACKAGING ----- */
     {
       slug: 'letterheads', name: 'Letterheads', cat: 'stationery-packaging', sub: 'letterheads',
-      art: 'letterhead', badges: [], rating: 4.8, reviews: 49, unit: 'sheet',
+      art: 'letterhead', unit: 'sheet',
       blurb: 'Laser-safe letterheads on uncoated and conqueror stocks.',
       turnaround: 'Ready in 3 working days',
       specs: ['100–120gsm laser-compatible', 'Uncoated, laid or wove finishes', 'Matching comp slips available', 'Shrink-wrapped in 250s'],
@@ -605,7 +603,7 @@
     },
     {
       slug: 'compliment-slips', name: 'Compliment Slips', cat: 'stationery-packaging', sub: 'comp-slips',
-      art: 'letterhead', badges: [], rating: 4.7, reviews: 31, unit: 'slip',
+      art: 'letterhead', unit: 'slip',
       blurb: 'DL comp slips printed to match your letterheads and cards.',
       turnaround: 'Ready in 3 working days',
       specs: ['DL 210 × 99mm standard', '100–170gsm stocks', 'Writeable uncoated options', 'Matching stationery sets'],
@@ -618,7 +616,7 @@
     },
     {
       slug: 'ncr-invoice-pads', headlineQty: 10, name: 'NCR Invoice Pads', cat: 'stationery-packaging', sub: 'ncr-pads',
-      art: 'ncr', badges: ['Trade favourite'], rating: 4.9, reviews: 88, unit: 'pad',
+      art: 'ncr', unit: 'pad',
       blurb: 'Duplicate and triplicate carbonless pads, numbered and glued.',
       turnaround: 'Ready in 4 working days',
       specs: ['Duplicate or triplicate sets', 'Sequential numbering included', 'Glued and board-backed', 'Writing shield supplied free'],
@@ -632,7 +630,7 @@
     },
     {
       slug: 'branded-boxes', name: 'Branded Boxes & Packaging', cat: 'stationery-packaging', sub: 'boxes',
-      art: 'boxes', badges: [], rating: 4.8, reviews: 27, unit: 'box',
+      art: 'boxes', unit: 'box',
       blurb: 'Short-run printed mailers and product boxes with your branding inside and out.',
       turnaround: 'Ready in 7–10 working days',
       specs: ['E-flute and corrugated board', 'Printed inside and out', 'Die-cut mailers or tuck boxes', 'Low 50-unit minimum'],

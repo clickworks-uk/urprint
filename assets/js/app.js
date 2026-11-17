@@ -46,9 +46,51 @@
   function qs(s, r) { return (r || document).querySelector(s); }
   function qsa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); }
-  function stars(r) { var full = Math.round(r); return '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full); }
   function param(name) { return new URLSearchParams(location.search).get(name); }
   function uid() { return 'it_' + Math.random().toString(36).slice(2, 10); }
+
+
+  /* ---------------------------------------------------------------- SEO --- */
+  var SITE_ORIGIN = 'https://urprint-seven.vercel.app';
+  /* category.html and product.html render from query parameters, so their
+     canonical, og:url and title have to be corrected after the data loads. */
+  function setPageMeta(o) {
+    function meta(sel, attr, val) {
+      var el = document.head.querySelector(sel);
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr.k, attr.v); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    }
+    if (o.title) {
+      document.title = o.title;
+      meta('meta[property="og:title"]', { k: 'property', v: 'og:title' }, o.title);
+    }
+    if (o.description) {
+      meta('meta[name="description"]', { k: 'name', v: 'description' }, o.description);
+      meta('meta[property="og:description"]', { k: 'property', v: 'og:description' }, o.description);
+    }
+    if (o.path) {
+      var abs = SITE_ORIGIN + '/' + o.path.replace(/^\//, '');
+      var link = document.head.querySelector('link[rel="canonical"]');
+      if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link); }
+      link.href = abs;
+      meta('meta[property="og:url"]', { k: 'property', v: 'og:url' }, abs);
+    }
+    if (o.breadcrumbs && o.breadcrumbs.length) {
+      var old = document.getElementById('ld-breadcrumbs');
+      if (old) old.remove();
+      var sc = document.createElement('script');
+      sc.type = 'application/ld+json';
+      sc.id = 'ld-breadcrumbs';
+      sc.textContent = JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+        itemListElement: o.breadcrumbs.map(function (b, i) {
+          return { '@type': 'ListItem', position: i + 1, name: b.name,
+                   item: SITE_ORIGIN + '/' + String(b.path).replace(/^\//, '') };
+        })
+      });
+      document.head.appendChild(sc);
+    }
+  }
 
   /* ------------------------------------------------------------- basket --- */
   var Basket = {
@@ -86,7 +128,7 @@
   /* ------------------------------------------------------------- chrome --- */
   function utilityBar() {
     return '' +
-      '<div class="utility"><div class="wrap utility__inner">' +
+      '<section class="utility" aria-label="Delivery, collection and contact information"><div class="wrap utility__inner">' +
       '<ul class="utility__perks">' +
       '<li>' + I.pin + ' Free local collection in Wolverhampton</li><li class="dot"></li>' +
       '<li>' + I.truck + ' Fast UK-wide delivery</li><li class="dot"></li>' +
@@ -96,13 +138,11 @@
       '<li><a href="#" data-quote>' + I.quote + ' Request a custom quote</a></li>' +
       '<li><a href="artwork-guidelines.html">' + I.file + ' Artwork guidelines</a></li>' +
       '<li><a href="track-order.html">' + I.box + ' Track order</a></li>' +
-      '</ul></div></div>';
+      '</ul></div></section>';
   }
 
   function megaFor(cat) {
-    var popular = D.productsIn(cat.slug).slice().sort(function (a, b) {
-      return (b.badges.length - a.badges.length) || (b.reviews - a.reviews);
-    }).slice(0, 4);
+    var featured = D.productsIn(cat.slug).slice(0, 4);
 
     var colTypes = '<div class="mega__col"><h4>Shop by type</h4><ul>' +
       cat.subs.map(function (s) {
@@ -111,8 +151,8 @@
       '<li><a href="category.html?c=' + cat.slug + '"><strong>View all ' + esc(cat.name.toLowerCase()) + ' &rarr;</strong></a></li>' +
       '</ul></div>';
 
-    var colPopular = '<div class="mega__col"><h4>Popular right now</h4><ul>' +
-      popular.map(function (pr) {
+    var colPopular = '<div class="mega__col"><h4>Browse products</h4><ul>' +
+      featured.map(function (pr) {
         return '<li><a href="product.html?p=' + pr.slug + '">' + esc(pr.name) +
           '<span class="mega__price">' + esc(D.fromLabel(pr)) + ' incl. VAT</span></a></li>';
       }).join('') + '</ul></div>';
@@ -127,7 +167,6 @@
 
     var p = cat.promo;
     var promo = '<div class="mega__promo">' +
-      '<span class="badge' + (/same-day|fast|free/i.test(p.badge) ? ' badge--amber' : '') + '">' + esc(p.badge) + '</span>' +
       '<h5>' + esc(p.title) + '</h5><p>' + esc(p.text) + '</p>' +
       '<a class="btn btn--sm" href="' + (p.href === '#quote' ? '#' : p.href) + '"' + (p.href === '#quote' ? ' data-quote' : '') + '>' +
       (p.href === '#quote' ? 'Request a quote' : 'Configure &amp; order') + '</a>' +
@@ -147,17 +186,19 @@
       '<header class="header">' +
       '<div class="wrap header__main">' +
       '<button class="iconbtn burger" type="button" data-mnav-open aria-label="Open menu">' + I.menu + '</button>' +
-      '<a class="brand" href="index.html" aria-label="UR Print home"><img src="assets/img/logo.png" alt="UR Print" width="900" height="328"></a>' +
+      '<a class="brand" href="index.html" aria-label="UR Print home">' +
+      '<picture><source srcset="assets/img/logo.webp" type="image/webp">' +
+      '<img src="assets/img/logo.png" alt="UR Print" width="320" height="117" fetchpriority="high" decoding="async"></picture></a>' +
       '<div class="search" role="search">' +
       '<span class="search__icon">' + I.search + '</span>' +
       '<label class="sr-only" for="site-search">Search products</label>' +
-      '<input id="site-search" type="search" autocomplete="off" placeholder="Search business cards, shop signs, flyers, banners..." aria-expanded="false" aria-controls="search-results">' +
+      '<input id="site-search" type="search" autocomplete="off" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="search-results" placeholder="Search business cards, shop signs, flyers, banners...">' +
       '<button class="search__btn" type="button" data-search-go>Search</button>' +
       '<div class="search__results" id="search-results" role="listbox" hidden></div>' +
       '</div>' +
       '<div class="header__actions">' +
-      '<a class="iconbtn" href="artwork-guidelines.html">' + I.help + '<span>Help</span></a>' +
-      '<a class="iconbtn" href="#" data-account>' + I.user + '<span>Sign in</span></a>' +
+      '<a class="iconbtn" href="artwork-guidelines.html" aria-label="Help and artwork guidelines">' + I.help + '<span>Help</span></a>' +
+      '<a class="iconbtn" href="#" data-account aria-label="Sign in to your account">' + I.user + '<span>Sign in</span></a>' +
       '<button class="iconbtn" type="button" data-basket-open aria-label="Open basket">' + I.basket +
       '<span>Basket</span><span class="iconbtn__count" data-basket-count data-empty="true">0</span></button>' +
       '</div></div>' +
@@ -177,7 +218,7 @@
     }).join('');
     return '<div class="mnav" data-mnav hidden><div class="overlay is-open" data-mnav-close></div>' +
       '<div class="mnav__panel" role="dialog" aria-label="Menu">' +
-      '<div class="mnav__head"><img src="assets/img/logo.png" alt="UR Print" width="900" height="328">' +
+      '<div class="mnav__head"><img src="assets/img/logo.png" alt="UR Print" width="320" height="117" loading="lazy" decoding="async">' +
       '<button class="iconclose" type="button" data-mnav-close aria-label="Close menu">' + I.close + '</button></div>' +
       items +
       '<div class="mnav__foot">' +
@@ -191,43 +232,45 @@
   function footer() {
     var catLinks = D.CATEGORIES.map(function (c) { return '<li><a href="category.html?c=' + c.slug + '">' + esc(c.name) + '</a></li>'; }).join('');
     return '' +
-      /* local trust bar */
-      '<section class="localbar"><div class="wrap localbar__grid">' +
-      '<div><h3>Visit our Wolverhampton print works</h3>' +
+      '<footer>' +
+      /* local information — inside the footer landmark */
+      '<section class="localbar" aria-label="Visit us"><div class="wrap localbar__grid">' +
+      '<div><h2>Visit our Wolverhampton print works</h2>' +
       '<address>' + esc(CO.name) + '<br>' + esc(CO.addressLine) + '<br>' + esc(CO.city) + '<br>' + esc(CO.postcode) + '<br>' +
       '<a href="' + CO.phoneHref + '">' + CO.phone + '</a> · <a href="mailto:' + CO.email + '">' + CO.email + '</a></address>' +
       '<a class="maplink" href="' + CO.mapsUrl + '" target="_blank" rel="noopener">' + miniMap() +
       '<span class="bar">' + I.pin + ' Open in Google Maps — free customer parking on site</span></a></div>' +
-      '<div><h3>Opening hours</h3><ul class="hours">' +
+      '<div><h2>Opening hours</h2><ul class="hours">' +
       CO.hours.map(function (h) { return '<li><span>' + esc(h.d) + '</span><b class="' + (h.closed ? 'closed' : '') + '">' + esc(h.h) + '</b></li>'; }).join('') +
       '</ul><p class="formnote">Artwork received before 11am is usually on press the same day.</p></div>' +
-      '<div><h3>Talk to a printer</h3><p style="font-size:.92rem;color:var(--ink-60)">Not sure which stock, size or material you need? Call the unit and speak to the person who will run the job.</p>' +
+      '<div><h2>Talk to a printer</h2><p style="font-size:.92rem;color:var(--ink-60)">Not sure which stock, size or material you need? Call the unit and speak to the person who will run the job.</p>' +
       '<a class="btn btn--block" href="' + CO.phoneHref + '">' + I.phone + ' ' + CO.phone + '</a>' +
       '<a class="btn btn--ghost btn--block" style="margin-top:10px" href="#" data-quote>Request a custom quote</a></div>' +
       '</div></section>' +
-      /* footer proper */
-      '<footer class="footer"><div class="wrap footer__grid">' +
-      '<div class="footer__brand"><img src="assets/img/logo-white.png" alt="UR Print" width="900" height="328">' +
+      '<div class="footer"><div class="wrap footer__grid">' +
+      '<div class="footer__brand">' +
+      '<picture><source srcset="assets/img/logo-white.webp" type="image/webp">' +
+      '<img src="assets/img/logo-white.png" alt="UR Print" width="320" height="117" loading="lazy" decoding="async"></picture>' +
       '<p>Litho, digital and large-format printing, signage and workwear — produced in-house at Ward Street, Wolverhampton since 2009.</p>' +
       '<div class="footer__social">' +
       '<a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.5-1.5h1.7V4c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V10H7.5v3h2.7v8z"/></svg></a>' +
       '<a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17" cy="7" r="1.1" fill="currentColor" stroke="none"/></svg></a>' +
       '<a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H4.2V20h2.7zM5.5 3.8a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2M20 13.6c0-3-1.6-4.4-3.8-4.4-1.7 0-2.5.9-2.9 1.6V8.5H10.6V20h2.7v-6.2c0-1.4.6-2.2 1.8-2.2s1.7.8 1.7 2.2V20H20z"/></svg></a>' +
       '</div></div>' +
-      '<div><h4>Products</h4><ul>' + catLinks + '</ul></div>' +
-      '<div><h4>Artwork &amp; help</h4><ul>' +
+      '<div><h3>Products</h3><ul>' + catLinks + '</ul></div>' +
+      '<div><h3>Artwork &amp; help</h3><ul>' +
       '<li><a href="artwork-guidelines.html">Artwork guidelines</a></li>' +
       '<li><a href="artwork-guidelines.html#templates">Free templates</a></li>' +
       '<li><a href="artwork-guidelines.html#design">In-house design service</a></li>' +
       '<li><a href="track-order.html">Track my order</a></li>' +
       '<li><a href="#" data-quote>Request a quote</a></li></ul></div>' +
-      '<div><h4>Services</h4><ul>' +
+      '<div><h3>Services</h3><ul>' +
       '<li><a href="#" data-quote>Free site surveys</a></li>' +
       '<li><a href="#" data-quote>Sign installation</a></li>' +
       '<li><a href="category.html?c=stickers-labels&s=vehicle-graphics">Vehicle wrapping</a></li>' +
       '<li><a href="#" data-quote>Trade &amp; account printing</a></li>' +
       '<li><a href="#" data-quote>Leaflet distribution</a></li></ul></div>' +
-      '<div><h4>Company</h4><ul>' +
+      '<div><h3>Company</h3><ul>' +
       '<li><a href="' + CO.mapsUrl + '" target="_blank" rel="noopener">Find us</a></li>' +
       '<li><a href="mailto:' + CO.email + '">Contact us</a></li>' +
       '<li><a href="#">Delivery &amp; collection</a></li>' +
@@ -237,7 +280,7 @@
       '<div class="wrap footer__bottom">' +
       '<span>© ' + new Date().getFullYear() + ' ' + esc(CO.name) + ' · ' + esc(CO.addressLine) + ', ' + esc(CO.city) + ' ' + esc(CO.postcode) + ' · Prices shown include VAT at 20%</span>' +
       '<div class="payicons"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>APPLE&nbsp;PAY</span><span>KLARNA</span></div>' +
-      '</div></footer>';
+      '</div></div></footer>';
   }
 
   function miniMap() {
@@ -260,7 +303,7 @@
   /* ------------------------------------------------------ basket drawer --- */
   function drawerMarkup() {
     return '<div class="overlay" data-overlay></div>' +
-      '<aside class="drawer" data-drawer role="dialog" aria-label="Your basket" aria-hidden="true">' +
+      '<aside class="drawer" data-drawer role="dialog" aria-label="Your basket" inert>' +
       '<div class="drawer__head"><h2>Your basket <span data-drawer-count style="color:var(--ink-60);font-weight:600"></span></h2>' +
       '<button class="iconclose" type="button" data-basket-close aria-label="Close basket">' + I.close + '</button></div>' +
       '<div class="drawer__body" data-drawer-body></div>' +
@@ -325,14 +368,15 @@
 
   function openDrawer() {
     renderDrawer();
-    qs('[data-drawer]').classList.add('is-open');
-    qs('[data-drawer]').setAttribute('aria-hidden', 'false');
+    var dr = qs('[data-drawer]');
+    dr.classList.add('is-open');
+    dr.removeAttribute('inert');
     qs('[data-overlay]').classList.add('is-open');
     document.body.classList.add('is-locked');
   }
   function closeDrawer() {
     var d = qs('[data-drawer]'); if (!d) return;
-    d.classList.remove('is-open'); d.setAttribute('aria-hidden', 'true');
+    d.classList.remove('is-open'); d.setAttribute('inert', '');
     qs('[data-overlay]').classList.remove('is-open');
     if (!qs('.modal.is-open')) document.body.classList.remove('is-locked');
   }
@@ -343,8 +387,8 @@
     return '<div class="modal" data-modal="quote" role="dialog" aria-modal="true" aria-labelledby="quote-title">' +
       '<div class="overlay is-open" data-modal-close></div>' +
       '<div class="modal__box">' +
-      '<div class="modal__head"><div><span class="badge badge--blue">Free · No obligation</span>' +
-      '<h2 id="quote-title" style="margin-top:10px">Request a quote or site survey</h2>' +
+      '<div class="modal__head"><div>' +
+      '<h2 id="quote-title">Request a quote or site survey</h2>' +
       '<p>Tell us what you need and we will come back within one working day — or arrange a free survey anywhere in the West Midlands.</p></div>' +
       '<button class="iconclose" type="button" data-modal-close aria-label="Close">' + I.close + '</button></div>' +
       '<div class="modal__body"><form data-quote-form novalidate>' +
@@ -492,9 +536,9 @@
   }
 
   global.URApp = {
-    I: I, el: el, qs: qs, qsa: qsa, esc: esc, stars: stars, param: param,
+    I: I, el: el, qs: qs, qsa: qsa, esc: esc, param: param,
     Basket: Basket, openDrawer: openDrawer, closeDrawer: closeDrawer, openModal: openModal, closeModal: closeModal,
-    toast: toast, lineItemHtml: lineItemHtml, fulfilmentPicker: fulfilmentPicker, mount: mount,
+    toast: toast, lineItemHtml: lineItemHtml, setPageMeta: setPageMeta, SITE_ORIGIN: SITE_ORIGIN, fulfilmentPicker: fulfilmentPicker, mount: mount,
     ORDER_KEY: ORDER_KEY, miniMap: miniMap
   };
 

@@ -1,0 +1,9 @@
+# UR Print — https://urprint-seven.vercel.app
+User-agent: *
+Allow: /
+
+# checkout.html and track-order.html carry <meta name="robots" content="noindex">.
+# They are deliberately NOT disallowed here: a blocked URL can never be crawled,
+# so the noindex would never be read.
+
+Sitemap: https://urprint-seven.vercel.app/sitemap.xml

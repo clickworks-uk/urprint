@@ -16,7 +16,25 @@
   var sub = cat && subSlug ? cat.subs.filter(function (s) { return s.slug === subSlug; })[0] : null;
 
   /* ------------------------------------------------------------- head --- */
-  document.title = (sub ? sub.name + ' — ' + cat.name : cat ? cat.name : 'All products') + ' | UR Print Wolverhampton';
+  var pageTitle = (sub ? sub.name + ' — ' + cat.name : cat ? cat.name : 'All products') + ' | UR Print Wolverhampton';
+  var pageDesc = sub
+    ? sub.name + ' from UR Print, Wolverhampton. ' + cat.tagline + ' Free local collection at Unit 1 Ward Street or UK-wide delivery.'
+    : cat
+      ? cat.blurb
+      : 'Business cards, flyers, signage, banners, stickers, workwear and stationery printed in Wolverhampton, with live online pricing.';
+  var crumbTrail = [{ name: 'Home', path: '' }];
+  if (cat) {
+    crumbTrail.push({ name: cat.name, path: 'category.html?c=' + cat.slug });
+    if (sub) crumbTrail.push({ name: sub.name, path: 'category.html?c=' + cat.slug + '&s=' + sub.slug });
+  } else {
+    crumbTrail.push({ name: 'All products', path: 'category.html' });
+  }
+  App.setPageMeta({
+    title: pageTitle,
+    description: pageDesc,
+    path: cat ? ('category.html?c=' + cat.slug + (sub ? '&s=' + sub.slug : '')) : 'category.html',
+    breadcrumbs: crumbTrail
+  });
   qs('[data-cat-title]').textContent = sub ? sub.name : cat ? cat.name : 'Everything we print';
   qs('[data-cat-blurb]').textContent = sub
     ? cat.tagline
@@ -54,13 +72,6 @@
   /* --------------------------------------------------------- products --- */
   var products = cat ? D.productsIn(cat.slug, sub ? sub.slug : null) : D.PRODUCTS.slice();
 
-  function badgeClass(b) {
-    if (/same-day|fast/i.test(b)) return 'badge--amber';
-    if (/premium|trade/i.test(b)) return 'badge--ink';
-    if (/free|no minimum/i.test(b)) return 'badge--blue';
-    return '';
-  }
-
   function priceBlock(p) {
     var f = D.fromParts(p);
     return '<div class="pcard__price">' + (f.qty ? '<span class="qty">' + esc(f.qty) + '</span>' : '') +
@@ -69,15 +80,11 @@
   function card(p) {
     var c = D.getCategory(p.cat);
     return '<a class="pcard" href="product.html?p=' + p.slug + '">' +
-      '<div class="pcard__media">' + Art.get(p.art) +
-      (p.badges.length ? '<div class="pcard__badges">' + p.badges.map(function (b) {
-        return '<span class="badge ' + badgeClass(b) + '">' + esc(b) + '</span>';
-      }).join('') + '</div>' : '') + '</div>' +
+      '<div class="pcard__media">' + Art.get(p.art) + '</div>' +
       '<div class="pcard__body">' +
       '<span class="pcard__cat">' + esc(c.name) + '</span>' +
       '<h3 class="pcard__title">' + esc(p.name) + '</h3>' +
       '<p class="pcard__blurb">' + esc(p.blurb) + '</p>' +
-      '<div class="pcard__rating"><span class="stars">' + App.stars(p.rating) + '</span>' + p.rating.toFixed(1) + ' (' + p.reviews + ')</div>' +
       priceBlock(p) +
       '<div class="pcard__foot"><span class="btn btn--sm">Configure &amp; order</span></div>' +
       '</div></a>';
@@ -87,9 +94,8 @@
     var list = products.slice();
     if (mode === 'price-asc') list.sort(function (a, b) { return D.headlineTier(a).price - D.headlineTier(b).price; });
     else if (mode === 'price-desc') list.sort(function (a, b) { return D.headlineTier(b).price - D.headlineTier(a).price; });
-    else if (mode === 'rating') list.sort(function (a, b) { return (b.rating - a.rating) || (b.reviews - a.reviews); });
     else if (mode === 'name') list.sort(function (a, b) { return a.name.localeCompare(b.name); });
-    else list.sort(function (a, b) { return (b.badges.length - a.badges.length) || (b.reviews - a.reviews); });
+    /* default: the curated catalogue order */
     return list;
   }
 
@@ -105,5 +111,5 @@
 
   var sel = qs('[data-sort]');
   sel.addEventListener('change', function () { render(sel.value); });
-  render('popular');
+  render('featured');
 })();
